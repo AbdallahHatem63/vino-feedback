@@ -9,84 +9,169 @@
 <title>فينو | شكاوى واقتراحات</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;overflow-x:hidden;font-family:Tahoma,"Segoe UI",Arial,sans-serif;background:#0f172a;color:#e5e7eb;display:flex;min-height:100vh;align-items:center;justify-content:center;padding:16px}
-.card{width:100%;max-width:520px;background:#1e293b;border-radius:18px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
-h1{margin:0 0 6px;font-size:22px}
-p.sub{margin:0 0 18px;color:#94a3b8;font-size:14px}
-label{display:block;margin:12px 0 6px;font-size:14px;color:#cbd5e1}
-select,input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#e5e7eb;font:inherit}
-textarea{min-height:140px;resize:vertical}
-button{margin-top:18px;width:100%;padding:13px;border:0;border-radius:10px;background:#22c55e;color:#06260f;font:inherit;font-weight:bold;font-size:16px;cursor:pointer}
-button:disabled{opacity:.6;cursor:wait}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;overflow-x:hidden;font-family:Tahoma,"Segoe UI",Arial,sans-serif;color:#e5e7eb;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:20px 16px;
+background:radial-gradient(900px 500px at 85% -10%,rgba(34,197,94,.18),transparent 60%),radial-gradient(700px 500px at -10% 110%,rgba(99,102,241,.2),transparent 60%),#0b1220}
+.card{margin-top:auto;width:100%;max-width:520px;background:linear-gradient(180deg,#1f2a40,#1a2336);border:1px solid rgba(148,163,184,.14);border-radius:20px;padding:26px 24px;box-shadow:0 18px 50px rgba(0,0,0,.45);animation:rise .5s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.logo{width:54px;height:54px;border-radius:16px;background:linear-gradient(135deg,#22c55e,#16a34a);display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 8px 20px rgba(34,197,94,.35);margin-bottom:12px;animation:float 3.2s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+h1{margin:0 0 6px;font-size:24px}
+.intro{margin:0 0 4px;color:#a7f3d0;font-size:14px}
+p.sub{margin:0 0 16px;color:#94a3b8;font-size:14px;line-height:1.6}
+label{display:block;margin:14px 0 6px;font-size:14px;color:#cbd5e1}
+select,input,textarea{width:100%;padding:12px 13px;border-radius:12px;border:1px solid #334155;background:#0f172a;color:#e5e7eb;font:inherit;transition:border-color .2s,box-shadow .2s}
+select:focus,input:focus,textarea:focus{outline:0;border-color:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.22)}
+textarea{min-height:130px;resize:vertical}
+.cnt{margin-top:4px;font-size:11px;color:#64748b;text-align:end}
+button{margin-top:18px;width:100%;padding:14px;border:0;border-radius:12px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#04210e;font:inherit;font-weight:bold;font-size:16px;cursor:pointer;box-shadow:0 8px 20px rgba(34,197,94,.3);transition:transform .15s,box-shadow .15s,filter .15s}
+button:hover{filter:brightness(1.06)}
+button:active{transform:scale(.98)}
+button:disabled{opacity:.65;cursor:wait}
 .hp{position:absolute;width:1px;height:1px;padding:0;border:0;overflow:hidden;clip:rect(0,0,0,0);opacity:0;pointer-events:none}
-.ok{text-align:center;padding:20px 0}
-.check{width:84px;height:84px;border-radius:50%;background:#22c55e;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;animation:pop .35s ease}
-.check svg{width:46px;height:46px}
-@keyframes pop{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
+.ok{text-align:center;padding:16px 0;position:relative}
+.check{width:96px;height:96px;margin:0 auto 14px;border-radius:50%;background:linear-gradient(135deg,#22c55e,#16a34a);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 0 rgba(34,197,94,.5);animation:pop .45s cubic-bezier(.2,1.4,.4,1) both,ring 1.4s .3s ease-out}
+.check svg{width:52px;height:52px}
+.check path{stroke-dasharray:30;stroke-dashoffset:30;animation:draw .45s .25s ease forwards}
+@keyframes pop{from{transform:scale(.2);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes ring{to{box-shadow:0 0 0 26px rgba(34,197,94,0)}}
+.spark{position:absolute;top:30px;left:50%;font-size:18px;opacity:0;animation:burst 1s .35s ease-out forwards}
+@keyframes burst{0%{opacity:1;transform:translate(0,0) scale(.6)}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.2)}}
 .err{background:#7f1d1d;color:#fecaca;padding:10px 12px;border-radius:10px;margin-top:14px;font-size:14px;display:none}
 a.again{display:inline-block;margin-top:14px;color:#93c5fd;cursor:pointer;font-size:14px}
+.agree{margin:10px 0 0;color:#94a3b8;font-size:12px;text-align:center}
+.terms{width:100%;max-width:520px;margin:16px 0 0;background:rgba(23,33,47,.85);border:1px solid rgba(148,163,184,.1);border-radius:16px;padding:16px 20px;color:#94a3b8;font-size:13px;line-height:1.8}
+.terms h2{margin:0 0 6px;font-size:15px;color:#cbd5e1}
+.terms ol{margin:0;padding-inline-start:20px}
+footer{margin:18px 0 4px;margin-bottom:auto;color:#64748b;font-size:12px;text-align:center}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.check path{stroke-dashoffset:0}}
 </style>
 </head>
 <body>
 <div class="card">
   <div id="formBox">
-    <h1>🎓 فينو</h1>
-    <p class="sub">اكتب لنا شكوى أو سؤال أو مشكلة أو اقتراح، ورأيك بيوصلنا مباشرة</p>
+    <div class="logo">🎓</div>
+    <h1 data-t="brand"></h1>
+    <p class="intro" data-t="intro"></p>
+    <p class="sub" data-t="sub"></p>
     <form id="f" autocomplete="off">
-      <label for="kind">نوع الرسالة</label>
+      <label for="kind" data-t="lKind"></label>
       <select id="kind">
-        <option value="suggestion">اقتراح</option>
-        <option value="complaint">شكوى</option>
-        <option value="problem">مشكلة</option>
-        <option value="question">سؤال</option>
+        <option value="suggestion" data-t="oSuggestion"></option>
+        <option value="complaint" data-t="oComplaint"></option>
+        <option value="problem" data-t="oProblem"></option>
+        <option value="question" data-t="oQuestion"></option>
       </select>
-      <label for="msg">اكتب رسالتك</label>
-      <textarea id="msg" maxlength="2000" required placeholder="اكتب هنا..."></textarea>
-      <label for="name">اسمك (اختياري)</label>
+      <label for="msg" data-t="lMsg"></label>
+      <textarea id="msg" maxlength="2000" required data-p="pMsg"></textarea>
+      <div class="cnt" id="cnt">0 / 2000</div>
+      <label for="name" data-t="lName"></label>
       <input id="name" maxlength="60">
-      <label for="contact">تليجرام أو إيميل للتواصل (اختياري)</label>
+      <label for="contact" data-t="lContact"></label>
       <input id="contact" maxlength="80">
       <input class="hp" id="hp" tabindex="-1" aria-hidden="true">
-      <button id="btn" type="submit">إرسال</button>
+      <button id="btn" type="submit" data-t="send"></button>
+      <p class="agree" data-t="agree"></p>
       <div class="err" id="err"></div>
     </form>
   </div>
   <div id="okBox" class="ok" style="display:none">
-    <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#06260f" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-    <h2 id="okMsg" style="margin:0 0 6px"></h2>
-    <p class="sub" style="margin:0">شكرا لوقتك</p>
-    <a class="again" id="again">إرسال رسالة تانية</a>
+    <span class="spark" style="--x:-70px;--y:-40px">✨</span><span class="spark" style="--x:70px;--y:-46px">🎉</span><span class="spark" style="--x:-50px;--y:30px">💚</span><span class="spark" style="--x:56px;--y:34px">⭐</span>
+    <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+    <h2 id="okMsg" style="margin:0 0 6px;font-size:20px;line-height:1.5"></h2>
+    <p class="sub" style="margin:0" data-t="thanks"></p>
+    <a class="again" id="again" data-t="again"></a>
   </div>
 </div>
+<section class="terms" id="terms">
+  <h2 data-t="tTitle"></h2>
+  <ol>
+    <li data-t="t1"></li>
+    <li data-t="t2"></li>
+    <li data-t="t3"></li>
+    <li data-t="t4"></li>
+    <li data-t="t5"></li>
+  </ol>
+</section>
+<footer data-t="footer"></footer>
 <script>
-// عنوان الإيميل اللي بتوصله الرسايل (FormSubmit.co مجاني من غير كارت، ولازم تأكيد مرة واحدة من الإيميل)
+// عنوان الاستلام (FormSubmit.co): مجاني من غير كارت
 var TO_EMAIL = "f15c898446a70e0fcea8d94d0eb97c79";
-var KINDS = {
-  suggestion: ["اقتراح", "تم بنجاح إضافة اقتراحك وسينفذ قريبا"],
-  complaint:  ["شكوى", "تم بنجاح استلام شكواك وسيتم النظر فيها قريبا"],
-  problem:    ["مشكلة", "تم بنجاح استلام مشكلتك وسيتم حلها قريبا"],
-  question:   ["سؤال", "تم بنجاح استلام سؤالك وسيتم الرد عليه قريبا"]
+var I18N = {
+  ar: {
+    title: "فينو | شكاوى واقتراحات", brand: "فينو", intro: "أهلا بيك 👋 رأيك بيفرق معانا وبيساعدنا نخلي فينو أحسن 💚",
+    sub: "اكتب لنا شكوى أو سؤال أو مشكلة أو اقتراح، ورأيك بيوصلنا مباشرة",
+    lKind: "نوع الرسالة", oSuggestion: "💡 اقتراح", oComplaint: "😕 شكوى", oProblem: "🛠️ مشكلة", oQuestion: "❓ سؤال",
+    lMsg: "اكتب رسالتك", pMsg: "اكتب هنا...", lName: "اسمك (اختياري)", lContact: "تليجرام أو إيميل للتواصل (اختياري)",
+    send: "إرسال", sending: "بيتبعت...", agree: "بإرسالك الرسالة إنت موافق على الشروط والأحكام اللي تحت",
+    thanks: "شكرا لوقتك", again: "إرسال رسالة تانية",
+    ok_suggestion: "تم بنجاح إضافة اقتراحك وسينفذ قريبا", ok_complaint: "تم بنجاح استلام شكواك وسيتم النظر فيها قريبا",
+    ok_problem: "تم بنجاح استلام مشكلتك وسيتم حلها قريبا", ok_question: "تم بنجاح استلام سؤالك وسيتم الرد عليه قريبا",
+    eEmpty: "اكتب رسالتك الأول", eWait: "استنى شوية قبل ما تبعت رسالة تانية", eFail: "ماقدرناش نبعت رسالتك دلوقتي، جرب تاني بعد شوية",
+    tTitle: "الشروط والأحكام",
+    t1: "رسالتك بتتبعت للمطور بس، وممكن نستخدمها عشان نحسّن فينو.",
+    t2: "مفيش ضمان إن كل اقتراح أو شكوى هيتنفذ أو يتردّ عليه.",
+    t3: "من فضلك متكتبش بيانات شخصية أو حساسة (كلمات سر، رقم تليفون، عنوان، صور بطاقة).",
+    t4: "استخدم لغة محترمة. الرسائل المسيئة أو العشوائية ممكن تتجاهل.",
+    t5: "الخدمة مجانية وبتتقدم زي ما هي، وده كلام تعريفي مش استشارة قانونية.",
+    footer: "© 2027 Techspher. جميع الحقوق محفوظة", subjectPrefix: "فينو | ", subjectNew: " جديدة",
+    kinds: {suggestion: "اقتراح", complaint: "شكوى", problem: "مشكلة", question: "سؤال"}
+  },
+  en: {
+    title: "Vino | Complaints and suggestions", brand: "Vino", intro: "Hi there 👋 Your feedback matters and helps us make Vino better 💚",
+    sub: "Send us a complaint, question, problem or suggestion. We get it directly.",
+    lKind: "Message type", oSuggestion: "💡 Suggestion", oComplaint: "😕 Complaint", oProblem: "🛠️ Problem", oQuestion: "❓ Question",
+    lMsg: "Your message", pMsg: "Write here...", lName: "Your name (optional)", lContact: "Telegram or email to reach you (optional)",
+    send: "Send", sending: "Sending...", agree: "By sending, you agree to the terms and conditions below",
+    thanks: "Thanks for your time", again: "Send another message",
+    ok_suggestion: "Your suggestion was added successfully and will be implemented soon", ok_complaint: "Your complaint was received and will be looked into soon",
+    ok_problem: "Your problem was received and will be solved soon", ok_question: "Your question was received and will be answered soon",
+    eEmpty: "Please write your message first", eWait: "Please wait a moment before sending another message", eFail: "We could not send your message right now, please try again in a bit",
+    tTitle: "Terms and conditions",
+    t1: "Your message goes to the developer only, and may be used to improve Vino.",
+    t2: "There is no guarantee that every suggestion or complaint will be implemented or answered.",
+    t3: "Please do not include personal or sensitive information (passwords, phone numbers, addresses, ID photos).",
+    t4: "Use respectful language. Abusive or random messages may be ignored.",
+    t5: "The service is free and provided as is. This text is informational, not legal advice.",
+    footer: "© 2027 Techspher. All rights reserved", subjectPrefix: "Vino | ", subjectNew: " new",
+    kinds: {suggestion: "Suggestion", complaint: "Complaint", problem: "Problem", question: "Question"}
+  }
 };
-function san(v, n) { return String(v || "").replace(/[\u0000-\u0008\u000b-\u001f<>]/g, "").trim().slice(0, n); }
+var LANG = (function () {
+  var q = (location.search.match(/[?&]lang=(ar|en)\b/) || [])[1];
+  if (q) { return q; }
+  var l = String((navigator.languages && navigator.languages[0]) || navigator.language || "en").toLowerCase();
+  return l.indexOf("ar") === 0 ? "ar" : "en";
+})();
+var T = I18N[LANG];
+document.documentElement.lang = LANG;
+document.documentElement.dir = LANG === "ar" ? "rtl" : "ltr";
+document.title = T.title;
 var $ = function (id) { return document.getElementById(id); };
+Array.prototype.forEach.call(document.querySelectorAll("[data-t]"), function (el) { el.textContent = T[el.getAttribute("data-t")]; });
+Array.prototype.forEach.call(document.querySelectorAll("[data-p]"), function (el) { el.placeholder = T[el.getAttribute("data-p")]; });
+function san(v, n) { return String(v || "").replace(/[\u0000-\u0008\u000b-\u001f<>]/g, "").trim().slice(0, n); }
 $("f").addEventListener("submit", function (e) {
   e.preventDefault();
   var err = $("err"); err.style.display = "none";
-  if ($("hp").value) { return; }                       // فخ للبوتات
+  if ($("hp").value) { return; }
   var msg = san($("msg").value, 2000);
-  if (msg.length < 3) { err.textContent = "اكتب رسالتك الأول"; err.style.display = "block"; return; }
+  if (msg.length < 3) { err.textContent = T.eEmpty; err.style.display = "block"; return; }
   var last = +localStorage.getItem("vino_fb_last") || 0;
-  if (Date.now() - last < 20000) { err.textContent = "استنى شوية قبل ما تبعت رسالة تانية"; err.style.display = "block"; return; }
+  if (Date.now() - last < 20000) { err.textContent = T.eWait; err.style.display = "block"; return; }
   var k = $("kind").value, btn = $("btn");
-  btn.disabled = true; btn.textContent = "بيتبعت...";
+  btn.disabled = true; btn.textContent = T.sending;
+  var ar = I18N.ar.kinds[k];
   var payload = {
-    _subject: "فينو | " + KINDS[k][0] + " جديدة",
+    _subject: "فينو | " + ar + " جديدة",
     _template: "table",
     _captcha: "false",
-    "النوع": KINDS[k][0],
+    "النوع": ar,
     "الرسالة": msg,
     "الاسم": san($("name").value, 60) || "-",
-    "للتواصل": san($("contact").value, 80) || "-"
+    "للتواصل": san($("contact").value, 80) || "-",
+    "لغة الصفحة": LANG
   };
   fetch("https://formsubmit.co/ajax/" + encodeURIComponent(TO_EMAIL), {
     method: "POST",
@@ -96,17 +181,15 @@ $("f").addEventListener("submit", function (e) {
     .then(function (d) {
       if (d && (d.success === "true" || d.success === true)) {
         localStorage.setItem("vino_fb_last", String(Date.now()));
-        $("okMsg").textContent = KINDS[k][1];
+        $("okMsg").textContent = T["ok_" + k];
         $("formBox").style.display = "none"; $("okBox").style.display = "block";
       } else { throw new Error((d && d.message) || "failed"); }
     })
-    .catch(function () {
-      err.textContent = "ماقدرناش نبعت رسالتك دلوقتي، جرب تاني بعد شوية";
-      err.style.display = "block";
-    })
-    .then(function () { btn.disabled = false; btn.textContent = "إرسال"; });
+    .catch(function () { err.textContent = T.eFail; err.style.display = "block"; })
+    .then(function () { btn.disabled = false; btn.textContent = T.send; });
 });
-$("again").onclick = function () { $("msg").value = ""; $("okBox").style.display = "none"; $("formBox").style.display = "block"; };
+$("msg").addEventListener("input", function () { $("cnt").textContent = this.value.length + " / 2000"; });
+$("again").onclick = function () { $("msg").value = ""; $("cnt").textContent = "0 / 2000"; $("okBox").style.display = "none"; $("formBox").style.display = "block"; };
 </script>
 </body>
 </html>
